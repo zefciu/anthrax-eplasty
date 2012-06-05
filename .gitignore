@@ -1,0 +1,5 @@
+src/AnthraxEplasty.egg-info
+__pycache__
+*.swp
+build/
+dist/
