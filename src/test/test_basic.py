@@ -12,6 +12,7 @@ class Test(unittest.TestCase):
 
         class KnightForm(Form):
             __introspect__ = ('eplasty', Knight)
+            name = {'label': 'Imię'}
 
         self.KnightForm = KnightForm
 
@@ -20,6 +21,7 @@ class Test(unittest.TestCase):
         self.assertTrue('name' in form.__fields__)
         self.assertEqual(form.__fields__['name'].name, 'name')
         self.assertIs(form.__fields__['name'].parent, form)
+        self.assertEqual(form.__fields__['name'].label, 'Imię')
         self.assertTrue('id' in form.__fields__)
 
     def test_new_form(self):
