@@ -2,12 +2,12 @@ from collections import OrderedDict
 
 from eplasty.object.base import Object
 from eplasty.object.meta import ObjectMeta
-from eplasty.field.simple import Integer, CharacterVarying, Text
+from eplasty.field.simple import Integer, CharacterVarying, Text, Date
 from eplasty.field.helper import SimplePK
 
 from anthrax.util import bind_fields
 from anthrax.introspector import Introspector
-from anthrax.field import IntegerField, TextField
+from anthrax.field import IntegerField, TextField, DateField
 from anthrax.widget import Hidden, TextInput, LongTextInput
 
 EDIT = 'EDIT'
@@ -41,10 +41,13 @@ class EplastyIntrospector(Introspector):
     def _text_handler(self):
         return TextField(widgets=[LongTextInput, TextInput])
 
+    def _date_handler(self):
+        return DateField()
 
     _map = {
         SimplePK: '_simple_pk_handler',
         Integer: '_integer_handler',
         CharacterVarying: '_varchar_handler',
         Text: '_text_handler',
+        Date: '_date_handler',
     }
