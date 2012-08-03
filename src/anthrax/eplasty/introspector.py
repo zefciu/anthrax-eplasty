@@ -29,7 +29,9 @@ class EplastyIntrospector(Introspector):
         return result
 
     def _handle_field(self, field):
-        return getattr(self, self._map[type(field)])()
+        dispatcher = self._map.get(type(field))
+        if dispatcher:
+            return getattr(self, dispatcher)()
 
     def _simple_pk_handler(self):
         return IntegerField(widgets=[Hidden], mode=EDIT)
