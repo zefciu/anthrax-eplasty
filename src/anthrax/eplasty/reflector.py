@@ -2,13 +2,13 @@ from collections import OrderedDict
 
 from eplasty.object.base import Object
 from eplasty.object.meta import ObjectMeta
-from eplasty.field.simple import Integer, CharacterVarying, Text, Date
+from eplasty.field.simple import Integer, CharacterVarying, Text, Date, Array
 from eplasty.field.helper import SimplePK
 from eplasty.field.adapter import Html
 
 from anthrax.util import bind_fields
 from anthrax.reflector import Reflector
-from anthrax.field import IntegerField, TextField, DateField
+from anthrax.field import IntegerField, TextField, DateField, ListField
 from anthrax.widget import Hidden, TextInput, LongTextInput
 from anthrax.html_input.field import HtmlField
 
@@ -31,25 +31,29 @@ class EplastyReflector(Reflector):
     def _handle_field(self, field):
         dispatcher = self._map.get(type(field))
         if dispatcher:
-            return getattr(self, dispatcher)()
+            return getattr(self, dispatcher)(field)
 
-    def _simple_pk_handler(self):
+    def _simple_pk_handler(self, field):
         return IntegerField(widgets=[Hidden], mode=EDIT)
 
-    def _integer_handler(self):
+    def _integer_handler(self, field):
         return IntegerField()
 
-    def _varchar_handler(self):
+    def _varchar_handler(self, field):
         return TextField()
 
-    def _text_handler(self):
+    def _text_handler(self, field):
         return TextField(widgets=[LongTextInput, TextInput])
 
-    def _date_handler(self):
+    def _date_handler(self, field):
         return DateField()
 
-    def _html_handler(self):
+    def _html_handler(self, field):
         return HtmlField()
+
+    def _array_handler(self, field):
+        subfield = self._handle_field(field.itemtype)
+        return ListField(subfield=subfield)
 
     _map = {
         SimplePK: '_simple_pk_handler',
@@ -58,4 +62,5 @@ class EplastyReflector(Reflector):
         Text: '_text_handler',
         Date: '_date_handler',
         Html: '_html_handler', 
+        Array: '_array_handler',
     }
