@@ -29,7 +29,7 @@ setup(
         'Programming Language :: Python :: 3.2',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
     ],
-    entry_points = """[anthrax.introspector]
-eplasty = anthrax.eplasty.introspector:EplastyIntrospector""",
+    entry_points = """[anthrax.reflector]
+eplasty = anthrax.eplasty.reflector:EplastyReflector""",
 )
 

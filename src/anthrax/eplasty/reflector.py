@@ -7,18 +7,18 @@ from eplasty.field.helper import SimplePK
 from eplasty.field.adapter import Html
 
 from anthrax.util import bind_fields
-from anthrax.introspector import Introspector
+from anthrax.reflector import Reflector
 from anthrax.field import IntegerField, TextField, DateField
 from anthrax.widget import Hidden, TextInput, LongTextInput
 from anthrax.html_input.field import HtmlField
 
 EDIT = 'EDIT'
 
-class EplastyIntrospector(Introspector):
+class EplastyReflector(Reflector):
 
     def get_fields(self, form):
         if not isinstance(self.source, (Object, ObjectMeta)):
-            raise TypeError('The introspection source must be Elephantoplasty'
+            raise TypeError('The reflection source must be Elephantoplasty'
                 'Object or Object class')
         result = OrderedDict()
         for field in self.source.fields:
