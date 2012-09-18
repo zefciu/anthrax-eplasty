@@ -5,10 +5,13 @@ from eplasty.object.meta import ObjectMeta
 from eplasty.field.simple import Integer, CharacterVarying, Text, Date, Array
 from eplasty.field.helper import SimplePK
 from eplasty.field.adapter import Html
+from eplasty.field.blob import Blob
+from eplasty.field.image import Image
 
 from anthrax.util import bind_fields
 from anthrax.reflector import Reflector
 from anthrax.field import IntegerField, TextField, DateField, ListField
+from anthrax.field import FileField
 from anthrax.widget import Hidden, TextInput, LongTextInput
 from anthrax.html_input.field import HtmlField
 
@@ -55,6 +58,16 @@ class EplastyReflector(Reflector):
         subfield = self._handle_field(field.itemtype)
         return ListField(subfield=subfield)
 
+    def _file_handler(self, field):
+        return FileField()
+
+    def _image_handler(self, field):
+        try:
+            from anthrax.image.field import ImageField
+            return ImageField()
+        except ImportError:
+            return FileField()
+
     _map = {
         SimplePK: '_simple_pk_handler',
         Integer: '_integer_handler',
@@ -63,4 +76,6 @@ class EplastyReflector(Reflector):
         Date: '_date_handler',
         Html: '_html_handler', 
         Array: '_array_handler',
+        Blob: '_file_handler',
+        Image: '_image_handler',
     }
