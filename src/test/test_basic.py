@@ -11,7 +11,7 @@ class Test(unittest.TestCase):
             name = ep.field.CharacterVarying(40)
 
         class KnightForm(Form):
-            __introspect__ = ('eplasty', Knight)
+            __reflect__ = ('eplasty', Knight)
             name = {'label': 'Imię'}
 
         self.KnightForm = KnightForm

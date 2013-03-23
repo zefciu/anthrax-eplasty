@@ -30,6 +30,9 @@ setup(
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
     ],
     entry_points = """[anthrax.reflector]
-eplasty = anthrax.eplasty.reflector:EplastyReflector""",
+eplasty = anthrax.eplasty.reflector:EplastyReflector
+[anthrax.field_mixins]
+eplasty_unique = anthrax.eplasty.field:UniqueMixin
+""",
 )
 

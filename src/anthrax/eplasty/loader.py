@@ -11,6 +11,7 @@ def create_object(Type, form):
     return Type(**values)
 
 def load_form(obj, form):
+    form.object_ = obj
     for k, v in form.__fields__.items():
         val = getattr(obj, k, None)
         if val is not None:
