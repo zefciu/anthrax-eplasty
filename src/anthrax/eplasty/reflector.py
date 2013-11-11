@@ -71,7 +71,7 @@ class EplastyReflector(Reflector):
 
     def _array_handler(self, field, ObjClass):
         subfield = self._handle_field(field.itemtype, ObjClass)
-        return ListField, {'subfield': 'subfield'}
+        return ListField, {'subfield': subfield}
 
     def _file_handler(self, field, ObjClass):
         return FileField, {}

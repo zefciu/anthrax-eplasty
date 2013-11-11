@@ -5,7 +5,7 @@ with open('README.rst') as f:
     long_description = f.read()
 setup(
     name = 'AnthraxEplasty',
-    version = '0.0.2',
+    version = '0.0.3',
     author = 'Szymon Pyżalski',
     author_email = 'zefciu <szymon@pythonista.net>',
     description = 'Anthrax - generating forms from Elephantoplasty objects',
